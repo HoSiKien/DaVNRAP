@@ -1,0 +1,74 @@
+p.cssStyle {
+    color: white;
+}
+p.cssStyle{
+	font-style: oblique;
+}
+body {
+    background-color: rgb(45, 45, 47);
+    background-repeat: no-repeat;
+ }
+ </style>
+  <style type="text/css">
+  .nen{
+      padding:100px 100px;
+      font-size:30px;
+      background-image:src(E:\html\logo.jpg);
+      padding: 5px 10px;
+      background-image: linear-gradient(to left, #434343 0%, black 100%);
+      background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-position: center;
+              background-size: cover;
+
+  }
+  /* Thiết lập thanh tìm kiếm */
+  .search-bar {
+      float: right; /* Đẩy phần tử sang phải */
+      /* Cách lề trên */
+  }
+  .signin-bar {
+  float: right
+  }
+  .GachChan{
+  text-decoration: underline;
+  }
+  .signin-button {
+      padding: 5px 10px;
+      color: white;
+      background: black;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+  }
+  /* Thiết lập nút tìm kiếm */
+  .search-button {
+      border="10px"
+          width="100px"
+          height="100px"
+          src="E:\html\TimKiem.png"
+          alt="tim kiem" />
+  }
+
+  /* Thiết lập ô nhập tìm kiếm */
+  .search-input {
+      padding: 5px 20px;/* kich cỡ. Dọc - Ngang*/
+      border: 1px;
+      border-radius:10px; /*độ cong của ô tìm kiếm*/
+  }
+  .login-container button { /* nút đăng nhập đăng kí */ 
+      width: 10%;
+      height: 30%;
+      padding: 10px;
+      background-color: rgb(64, 64, 66);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  .login-container input {
+          width: 100%;
+          margin-bottom: 10px;
+          padding: 8px;
+          box-sizing: border-box;
+      }

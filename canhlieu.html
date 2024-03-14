@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert MP4 to MP3</title>
+</head>
+<body>
+    <input type="file" id="fileInput" accept="video/mp4">
+    <button onclick="convertToMP3()">Convert</button>
+    <script>
+        function convertToMP3() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            
+            if (file.type !== 'video/mp4') {
+                alert('Please select a valid MP4 file.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const videoBlob = new Blob([event.target.result], { type: 'video/mp4' });
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const audioDestination = audioContext.createMediaElementSource(new Audio());
+                const source = audioContext.createMediaElementSource(new Audio());
+                const gainNode = audioContext.createGain();
+
+                source.connect(gainNode);
+                gainNode.connect(audioDestination.destination);
+                source.mediaElement.src = URL.createObjectURL(videoBlob);
+                source.mediaElement.play();
+
+                source.mediaElement.onended = function() {
+                    const audioBlob = audioContext.createBufferSource();
+                    audioContext.decodeAudioData(event.target.result, function(buffer) {
+                        audioBlob.buffer = buffer;
+                        const audioData = audioBlob.buffer.getChannelData(0);
+                        const audioBuffer = audioContext.createBuffer(1, audioData.length, audioContext.sampleRate);
+                        audioBuffer.copyToChannel(audioData, 0);
+                        const audioBlobURL = URL.createObjectURL(new Blob([audioBuffer], { type: 'audio/mp3' }));
+                        const downloadLink = document.createElement('a');
+                        downloadLink.href = audioBlobURL;
+                        downloadLink.download = 'converted.mp3';
+                        downloadLink.click();
+                    });
+                };
+            };
+            reader.readAsArrayBuffer(file);
+        }
+    </script>
+</body>
+</html>
